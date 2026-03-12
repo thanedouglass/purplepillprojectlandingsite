@@ -122,7 +122,7 @@ xl   120px
 **Layout:**
 ```
 [SECTION TAG: // 005 — THE DEN]
-[HEADLINE: "THE DOOR IS ALMOST OPEN"]
+[HEADLINE: "LOOK BEYOND THE VEIL"]
 [SUBHEADING: Describing the Den as metaverse room]
 [PREVIEW PANEL: Dark atmospheric card with Den aesthetic]
   └── Dim ambient glow (crimson + purple)

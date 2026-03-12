@@ -5,7 +5,7 @@
  * Letters cycle through random alphabet chars before resolving to the real text.
  *
  * Usage:
- *   <h1 data-hyper-text="The Door Is Almost Open"></h1>
+ *   <h1 data-hyper-text="Text"></h1>
  *
  * Options via data attributes:
  *   data-duration="800"        total animation ms (default 800)
@@ -64,10 +64,10 @@ function scrambleText(el, text, duration = 800) {
 
 export function initHyperText() {
   document.querySelectorAll('[data-hyper-text]').forEach(el => {
-    const text     = el.dataset.hyperText;
+    const text = el.dataset.hyperText;
     const duration = parseInt(el.dataset.duration || '800', 10);
-    const onLoad   = el.dataset.animateOnLoad !== 'false';
-    const onHover  = el.dataset.hyperHover !== 'false';
+    const onLoad = el.dataset.animateOnLoad !== 'false';
+    const onHover = el.dataset.hyperHover !== 'false';
 
     if (!text) return;
 
