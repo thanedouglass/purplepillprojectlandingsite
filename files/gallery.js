@@ -1,0 +1,148 @@
+/**
+ * gallery.js — Purple Pill Project
+ * Renders media grid from gallery-data.js
+ * Handles filter tabs and lightbox.
+ */
+import { galleryItems } from './gallery-data.js';
+
+const grid      = document.getElementById('gallery-grid');
+const emptyEl   = document.getElementById('gallery-empty');
+const lightbox  = document.getElementById('gallery-lightbox');
+const iframe    = document.getElementById('lightbox-iframe');
+const closeBtn  = document.getElementById('lightbox-close');
+
+let currentFilter = 'all';
+
+// ── Render ──────────────────────────────────────────────────────────────────
+
+function renderGrid(filter = 'all') {
+  const items = filter === 'all'
+    ? galleryItems
+    : galleryItems.filter(item => item.category === filter);
+
+  grid.innerHTML = '';
+
+  if (items.length === 0) {
+    emptyEl.style.display = 'block';
+    return;
+  }
+
+  emptyEl.style.display = 'none';
+
+  items.forEach((item, i) => {
+    const card = buildCard(item, i);
+    grid.appendChild(card);
+  });
+}
+
+function buildCard(item, index) {
+  const card = document.createElement('div');
+  card.className   = 'gallery-card reveal';
+  card.role        = 'listitem';
+  card.style.transitionDelay = `${index * 0.06}s`;
+
+  const hasThumbnail = item.thumbnail && item.thumbnail !== '';
+  const thumbnailStyle = hasThumbnail
+    ? `background-image: url('${item.thumbnail}');`
+    : '';
+
+  card.innerHTML = `
+    <div class="gallery-card-thumb ${hasThumbnail ? '' : 'gallery-card-thumb--fallback'}"
+         style="${thumbnailStyle}"
+         aria-hidden="true">
+      ${item.type === 'video' ? '<div class="gallery-play-btn" aria-hidden="true">▶</div>' : ''}
+      ${item.live ? '<span class="gallery-badge gallery-badge--live">Live</span>' : ''}
+      ${item.episode ? `<span class="gallery-badge gallery-badge--ep">${item.episode}</span>` : ''}
+    </div>
+    <div class="gallery-card-info">
+      <h3 class="gallery-card-title">${item.title}</h3>
+      <div class="gallery-card-tags">
+        ${item.tags.slice(0, 3).map(t => `<span class="gallery-tag">${t}</span>`).join('')}
+      </div>
+      <p class="gallery-card-date">${formatDate(item.date)}</p>
+    </div>
+  `;
+
+  if (item.type === 'video' && item.embedUrl) {
+    card.addEventListener('click', () => openLightbox(item.embedUrl, item.title));
+    card.style.cursor = 'pointer';
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', `Play: ${item.title}`);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') openLightbox(item.embedUrl, item.title);
+    });
+  }
+
+  return card;
+}
+
+function formatDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+// ── Filters ─────────────────────────────────────────────────────────────────
+
+document.querySelectorAll('.gallery-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.gallery-filter').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+    currentFilter = btn.dataset.filter;
+    renderGrid(currentFilter);
+
+    // Re-observe new cards for scroll reveal
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.gallery-card.reveal:not(.visible)').forEach(el => {
+        el.classList.add('visible');
+      });
+    });
+  });
+});
+
+// ── Lightbox ─────────────────────────────────────────────────────────────────
+
+function openLightbox(embedUrl, title) {
+  iframe.src = embedUrl + '?autoplay=1';
+  iframe.title = title;
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  closeBtn.focus();
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  iframe.src = '';
+  document.body.style.overflow = '';
+}
+
+closeBtn.addEventListener('click', closeLightbox);
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) closeLightbox();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+});
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+renderGrid('all');
+
+// Observe gallery cards for scroll reveal after render
+requestAnimationFrame(() => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.gallery-card.reveal').forEach(el => observer.observe(el));
+});

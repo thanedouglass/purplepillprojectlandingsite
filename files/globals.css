@@ -1,0 +1,139 @@
+/* ═══════════════════════════════════════════════════════════
+   GLOBALS.CSS — Purple Pill Project
+   Reset, base body styles, shared utilities.
+   No component-specific styles here.
+═══════════════════════════════════════════════════════════ */
+
+/* ── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Base ──────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--bone);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 2px; }
+
+/* ── Scan Lines (global overlay) ──────────────────────── */
+#scanlines {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.04) 2px,
+    rgba(0,0,0,0.04) 4px
+  );
+  pointer-events: none;
+  z-index: var(--z-overlay);
+}
+
+/* ── Container ─────────────────────────────────────────── */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-px);
+}
+
+/* ── Section Shared ────────────────────────────────────── */
+section {
+  position: relative;
+  z-index: var(--z-base);
+}
+
+/* ── Section Tag ───────────────────────────────────────── */
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 16px;
+  opacity: 0.8;
+}
+
+/* ── Shared Button ─────────────────────────────────────── */
+.btn {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 36px;
+  border: 1.5px solid currentColor;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  cursor: pointer;
+  background: transparent;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-fast);
+  z-index: -1;
+}
+
+.btn:hover::before { transform: scaleX(1); }
+.btn:hover { color: var(--black); }
+
+.btn-primary   { color: var(--teal);  border-color: var(--teal); }
+.btn-secondary { color: var(--bone);  border-color: rgba(245,240,220,0.4); }
+.btn-crimson   { color: var(--crimson); border-color: var(--crimson); }
+.btn-gold      { color: var(--gold);  border-color: var(--gold); }
+
+/* ── Neon Divider ──────────────────────────────────────── */
+.neon-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(to right, var(--teal), var(--purple));
+  margin-bottom: 28px;
+  box-shadow: 0 0 8px rgba(0,206,209,0.6);
+}
+
+/* ── Scroll Reveal ─────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Responsive Container ──────────────────────────────── */
+@media (max-width: 900px) {
+  .container { padding: 0 var(--container-px-mobile); }
+}
+
+/* ── Reduced Motion ────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}

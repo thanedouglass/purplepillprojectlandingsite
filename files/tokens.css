@@ -1,0 +1,53 @@
+/* ═══════════════════════════════════════════════════════════
+   TOKENS.CSS — Purple Pill Project
+   Single source of truth for all design variables.
+   Change a value here → it updates everywhere.
+═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Color Palette ─────────────────────────────────────── */
+  --black:       #06020e;
+  --crimson:     #8b0014;
+  --purple:      #9400d3;
+  --teal:        #00ced1;
+  --bone:        #f5f0dc;
+  --gold:        #ffc832;
+  --dim-purple:  #1e0032;
+  --dark-red:    #320008;
+
+  /* ── Typography ────────────────────────────────────────── */
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body:    'Poppins', sans-serif;
+  --font-mono:    'Share Tech Mono', monospace;
+
+  /* ── Spacing Scale (8px base) ──────────────────────────── */
+  --space-xs:  8px;
+  --space-sm:  16px;
+  --space-md:  32px;
+  --space-lg:  64px;
+  --space-xl:  120px;
+
+  /* ── Section Rhythm ────────────────────────────────────── */
+  --section-pad-top:    120px;
+  --section-pad-bottom: 100px;
+
+  /* ── Z-Index Scale ─────────────────────────────────────── */
+  --z-base:    10;
+  --z-nav:     100;
+  --z-overlay: 9999;
+
+  /* ── Container ─────────────────────────────────────────── */
+  --container-max: 1280px;
+  --container-px:  48px;
+  --container-px-mobile: 24px;
+
+  /* ── Transitions ───────────────────────────────────────── */
+  --transition-fast:   0.2s ease;
+  --transition-medium: 0.35s ease;
+  --transition-slow:   0.7s ease;
+
+  /* ── Border Radii ──────────────────────────────────────── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+}

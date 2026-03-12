@@ -1,0 +1,49 @@
+<!-- ── GALLERY ───────────────────────────────────────────────────────────── -->
+<section id="gallery">
+  <div class="container">
+
+    <div class="gallery-header reveal">
+      <p class="section-tag">// 006 — Archive</p>
+      <h2 class="gallery-headline">THE <span class="gallery-hl-purple">RECORD.</span></h2>
+      <p class="gallery-subheading">
+        Every episode, event, and appearance — catalogued for collaborators, press, and partners.
+      </p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="gallery-filters reveal" role="tablist" aria-label="Gallery filter">
+      <button class="gallery-filter active" data-filter="all"     role="tab" aria-selected="true">All</button>
+      <button class="gallery-filter"        data-filter="episode" role="tab" aria-selected="false">Episodes</button>
+      <button class="gallery-filter"        data-filter="event"   role="tab" aria-selected="false">Live Events</button>
+      <button class="gallery-filter"        data-filter="press"   role="tab" aria-selected="false">Press</button>
+    </div>
+
+    <!-- Media Grid — rendered by gallery.js -->
+    <div class="gallery-grid" id="gallery-grid" role="list">
+      <!-- Cards injected here dynamically -->
+    </div>
+
+    <!-- Empty state -->
+    <div class="gallery-empty" id="gallery-empty" aria-live="polite">
+      No media in this category yet. Check back soon.
+    </div>
+
+  </div>
+
+  <!-- Lightbox -->
+  <div class="gallery-lightbox" id="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Media viewer">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close video">&times;</button>
+    <div class="lightbox-inner">
+      <iframe
+        id="lightbox-iframe"
+        src=""
+        title="Video player"
+        frameborder="0"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    </div>
+  </div>
+
+</section>

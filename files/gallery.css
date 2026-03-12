@@ -1,0 +1,281 @@
+/* ── GALLERY ──────────────────────────────────────────────── */
+#gallery {
+  padding: var(--section-pad-top) 0 var(--section-pad-bottom);
+  background: var(--black);
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+.gallery-header {
+  margin-bottom: 48px;
+}
+
+.gallery-headline {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 6vw, 96px);
+  line-height: 1.0;
+  letter-spacing: 0.02em;
+  margin-bottom: 16px;
+}
+
+.gallery-hl-purple { color: var(--purple); }
+
+.gallery-subheading {
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(245,240,220,0.6);
+  max-width: 500px;
+}
+
+/* ── Filter Tabs ─────────────────────────────────────────── */
+.gallery-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.gallery-filter {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid rgba(245,240,220,0.15);
+  color: rgba(245,240,220,0.45);
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border-radius: var(--radius-sm);
+}
+
+.gallery-filter:hover {
+  color: var(--bone);
+  border-color: rgba(245,240,220,0.4);
+}
+
+.gallery-filter.active {
+  color: var(--teal);
+  border-color: var(--teal);
+  background: rgba(0,206,209,0.06);
+}
+
+/* ── Grid ────────────────────────────────────────────────── */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ── Empty State ─────────────────────────────────────────── */
+.gallery-empty {
+  display: none;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: rgba(245,240,220,0.3);
+  padding: 80px 0;
+  text-transform: uppercase;
+}
+
+/* ── Cards ───────────────────────────────────────────────── */
+.gallery-card {
+  border: 1px solid rgba(148,0,211,0.2);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--dim-purple) 0%, var(--black) 100%);
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.gallery-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(148,0,211,0.5);
+  box-shadow: 0 12px 40px rgba(148,0,211,0.15);
+}
+
+/* Thumbnail */
+.gallery-card-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: var(--dim-purple);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.gallery-card-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(148,0,211,0.0);
+  transition: background var(--transition-fast);
+}
+
+.gallery-card:hover .gallery-card-thumb::after {
+  background: rgba(148,0,211,0.25);
+}
+
+/* Fallback gradient when no thumbnail */
+.gallery-card-thumb--fallback {
+  background: linear-gradient(135deg, var(--dim-purple) 0%, var(--dark-red) 100%);
+}
+
+/* Play Button */
+.gallery-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(245,240,220,0.15);
+  border: 1.5px solid rgba(245,240,220,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bone);
+  font-size: 18px;
+  transition: all var(--transition-fast);
+  z-index: 2;
+  backdrop-filter: blur(4px);
+  padding-left: 3px; /* optical centering for ▶ */
+}
+
+.gallery-card:hover .gallery-play-btn {
+  background: rgba(245,240,220,0.9);
+  color: var(--black);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Badges */
+.gallery-badge {
+  position: absolute;
+  top: 10px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  z-index: 2;
+}
+
+.gallery-badge--live {
+  left: 10px;
+  background: var(--teal);
+  color: var(--black);
+}
+
+.gallery-badge--ep {
+  right: 10px;
+  background: rgba(6,2,14,0.75);
+  color: var(--bone);
+  border: 1px solid rgba(245,240,220,0.2);
+  backdrop-filter: blur(4px);
+}
+
+/* Card Info */
+.gallery-card-info {
+  padding: 16px 18px 20px;
+}
+
+.gallery-card-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.04em;
+  color: var(--bone);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.gallery-card-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.gallery-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(0,206,209,0.7);
+  border: 1px solid rgba(0,206,209,0.2);
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+}
+
+.gallery-card-date {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(245,240,220,0.3);
+  text-transform: uppercase;
+}
+
+/* ── Lightbox ─────────────────────────────────────────────── */
+.gallery-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(6,2,14,0.95);
+  z-index: calc(var(--z-overlay) + 1);
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+.gallery-lightbox.active {
+  display: flex;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  background: transparent;
+  border: 1px solid rgba(245,240,220,0.3);
+  color: var(--bone);
+  font-size: 24px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+}
+
+.lightbox-close:hover {
+  background: rgba(245,240,220,0.1);
+  border-color: var(--bone);
+}
+
+.lightbox-inner {
+  width: min(900px, 90vw);
+  aspect-ratio: 16 / 9;
+}
+
+.lightbox-inner iframe {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(148,0,211,0.3);
+  border-radius: var(--radius-md);
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}

@@ -1,0 +1,177 @@
+/* ── PARTNERS ─────────────────────────────────────────────── */
+#partners {
+  padding: 64px 0;
+  background: linear-gradient(
+    180deg,
+    var(--black)      0%,
+    rgba(30,0,50,0.6) 50%,
+    var(--black)      100%
+  );
+  /* Fade edges so logos dissolve in/out of view */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+.partners-header {
+  text-align: center;
+  margin-bottom: 36px;
+  /* Override mask so the label stays fully visible */
+  -webkit-mask-image: none;
+  mask-image: none;
+  position: relative;
+  z-index: 2;
+
+  /* Re-apply mask only to the track, not the header */
+}
+
+/* Undo mask on header specifically */
+#partners .partners-header {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* Full section mask workaround: apply mask only to the track wrapper */
+#partners {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.partners-track-wrapper {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+/* Divider line above section */
+#partners::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(148,0,211,0.3) 20%,
+    rgba(0,206,209,0.3) 50%,
+    rgba(148,0,211,0.3) 80%,
+    transparent
+  );
+  margin-bottom: 0;
+}
+
+/* ── Scrolling Track ─────────────────────────────────────── */
+.partners-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: max-content;
+
+  /* Animation: scroll the full width of one set of logos */
+  animation: partnersScroll 28s linear infinite;
+}
+
+/* Pause on hover — lets visitors read a logo */
+.partners-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes partnersScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Individual Logo Item ─────────────────────────────────── */
+.partner-item {
+  flex-shrink: 0;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(148,0,211,0.15);
+}
+
+.partner-item:last-child {
+  border-right: none;
+}
+
+.partner-item a {
+  display: flex;
+  align-items: center;
+  outline-offset: 4px;
+}
+
+/* ── Logo Image ───────────────────────────────────────────── */
+.partner-item img {
+  height: 40px;           /* Consistent height — width scales naturally */
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+
+  /* Desaturate by default — color on hover */
+  filter: grayscale(100%) brightness(0) invert(1) opacity(0.4);
+  transition: filter 0.3s ease, transform 0.25s ease;
+}
+
+.partner-item a:hover img {
+  filter: grayscale(0%) brightness(1) invert(0) opacity(1);
+  transform: scale(1.06);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .partner-item {
+    padding: 0 32px;
+  }
+
+  .partner-item img {
+    height: 28px;
+    max-width: 110px;
+  }
+
+  .partners-track {
+    animation-duration: 20s;
+  }
+}
+
+/* ── Reduced Motion ───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .partners-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding: 0 24px;
+    gap: 32px;
+  }
+
+  .partner-item {
+    border-right: none;
+  }
+}

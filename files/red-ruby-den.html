@@ -1,0 +1,90 @@
+<!-- ── RED RUBY DEN ──────────────────────────────────────────────────────── -->
+<section id="red-ruby-den">
+  <div class="container">
+
+    <div class="den-inner reveal">
+      <p class="section-tag">// 005 — The Den</p>
+      <h2 class="den-headline">
+        <span class="den-hl-bone">THE DOOR IS</span><br>
+        <span class="den-hl-crimson">ALMOST OPEN.</span>
+      </h2>
+      <p class="den-subheading">
+        The Red Ruby Den is a cyberpunk metaverse stage — a fully interactive room
+        where Remi and Bluey perform live, the audience becomes part of the show,
+        and truth hits different when you're inside it.
+        <br><br>
+        <strong>Sneak-peek access drops first.</strong> Get on the list.
+      </p>
+    </div>
+
+    <div class="den-layout">
+
+      <!-- Preview Panel -->
+      <div class="den-preview reveal" aria-label="Red Ruby Den preview">
+        <div class="den-preview-inner">
+          <div class="den-noise" aria-hidden="true"></div>
+          <div class="den-curtain-left"  aria-hidden="true"></div>
+          <div class="den-curtain-right" aria-hidden="true"></div>
+          <div class="den-stage-label">
+            <span class="den-stage-tag">// PREVIEW ACCESS //</span>
+            <p class="den-stage-name">RED RUBY DEN</p>
+            <p class="den-stage-sub">SEASON 01 — LOADING</p>
+          </div>
+          <div class="den-glitch-bar" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <!-- Waitlist Form -->
+      <div class="den-form-block reveal">
+        <p class="den-form-label">// Request Early Access</p>
+
+        <form id="den-waitlist-form" novalidate>
+          <div class="den-input-group">
+            <input
+              type="text"
+              id="den-name"
+              name="name"
+              placeholder="YOUR NAME"
+              autocomplete="name"
+              required
+            />
+          </div>
+          <div class="den-input-group">
+            <input
+              type="email"
+              id="den-email"
+              name="email"
+              placeholder="YOUR EMAIL"
+              autocomplete="email"
+              required
+            />
+          </div>
+          <div class="den-input-group">
+            <select id="den-role" name="role">
+              <option value="" disabled selected>YOUR ROLE</option>
+              <option value="student">Student</option>
+              <option value="educator">Educator / Counselor</option>
+              <option value="creator">Creator / Collaborator</option>
+              <option value="press">Press / Media</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-crimson den-submit" id="den-submit-btn">
+            Request Access
+          </button>
+        </form>
+
+        <!-- Success State (hidden by default) -->
+        <div class="den-success" id="den-success" aria-live="polite">
+          <p class="den-success-title">ACCESS PENDING.</p>
+          <p class="den-success-body">You're on the list. We'll reach you before the doors open.</p>
+        </div>
+
+        <p class="den-counter" id="den-counter">
+          <span class="den-counter-num">847</span> agents already on the list.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>

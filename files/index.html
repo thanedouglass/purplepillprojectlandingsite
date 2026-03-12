@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Purple Pill Project — Truth Is The Antidote</title>
+
+  <!-- SEO / Open Graph -->
+  <meta name="description" content="Theatrical cyberpunk education for a generation that deserves the truth — delivered in 30 seconds or less." />
+  <meta property="og:title" content="Purple Pill Project — Truth Is The Antidote" />
+  <meta property="og:description" content="Theatrical cyberpunk education for a generation that deserves the truth." />
+  <meta property="og:image" content="/assets/images/og-image.jpg" />
+  <meta property="og:url" content="https://purplepillproject.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+
+  <!-- Global Styles (load order matters) -->
+  <link rel="stylesheet" href="/styles/tokens.css" />
+  <link rel="stylesheet" href="/styles/globals.css" />
+  <link rel="stylesheet" href="/styles/animations.css" />
+
+  <!-- External Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/cobe@0.6.3/dist/index.umd.js" defer></script>
+</head>
+<body>
+
+  <!-- Scan lines overlay — global UI effect -->
+  <div id="scanlines" aria-hidden="true"></div>
+
+  <!-- ── COMPONENTS ── each resolves to its own HTML partial -->
+  <div data-component="nav"></div>
+  <div data-component="hero"></div>
+  <div data-component="stats-bar"></div>
+  <div data-component="mission"></div>
+  <div data-component="characters"></div>
+  <div data-component="episodes"></div>
+  <div data-component="red-ruby-den"></div>
+  <div data-component="gallery"></div>
+  <div data-component="manifesto"></div>
+  <div data-component="footer"></div>
+
+  <!-- Core Scripts -->
+  <script type="module" src="/scripts/component-loader.js"></script>
+
+</body>
+</html>
