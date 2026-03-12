@@ -75,12 +75,14 @@ async function initGlobalScripts() {
     { initGlobe },
     { initHyperText },
     { initMatrixText },
+    { initMagicTextReveal },
   ] = await Promise.all([
     import('/scripts/nav-scroll.js'),
     import('/scripts/scroll-reveal.js'),
     import('/scripts/globe.js'),
     import('/scripts/hyper-text.js'),
     import('/scripts/matrix-text.js'),
+    import('/scripts/magic-text-reveal.js'),
   ]);
 
   initNavScroll();
@@ -88,6 +90,7 @@ async function initGlobalScripts() {
   initGlobe();
   initHyperText();
   initMatrixText();
+  initMagicTextReveal();
 }
 
 /**
