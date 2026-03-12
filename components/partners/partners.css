@@ -1,6 +1,6 @@
 /* ── PARTNERS ─────────────────────────────────────────────── */
 #partners {
-  padding: 64px 0 56px;
+  padding: 72px 0 80px;
   background: linear-gradient(
     180deg,
     var(--black)       0%,
@@ -24,14 +24,13 @@
     rgba(148,0,211,0.3) 80%,
     transparent
   );
+  margin-bottom: 0;
 }
 
-/* ── Header — above the belt, NOT inside overflow:hidden ──── */
+/* ── Header ───────────────────────────────────────────────── */
 .partners-header {
   text-align: center;
-  padding: 28px 24px 24px;
-  position: relative;
-  z-index: 2;
+  padding: 36px 24px 40px;
 }
 
 /* ── MatrixText Label ─────────────────────────────────────── */
@@ -46,8 +45,8 @@
   justify-content: center;
   gap: 0;
   font-family: 'Share Tech Mono', monospace;
-  font-size: clamp(1.1rem, 2.5vw, 1.75rem);   /* Larger than before */
-  letter-spacing: 0.2em;
+  font-size: clamp(1.1rem, 2.5vw, 1.75rem);
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--cyan, #00ced1);
   cursor: default;
@@ -55,7 +54,6 @@
   animation: partnersLabelReveal 0.6s ease forwards 0.15s;
 }
 
-/* Individual chars rendered by matrix-text.js */
 .partners-label-text .mx-char {
   display: inline-block;
   min-width: 0.62em;
@@ -67,10 +65,9 @@
   min-width: 0.4em;
 }
 
-/* Green matrix glow while animating */
 .partners-label-text .mx-char.mx-active {
   color: #00ff00;
-  text-shadow: 0 2px 8px rgba(0,255,0,0.55);
+  text-shadow: 0 2px 8px rgba(0, 255, 0, 0.55);
 }
 
 @keyframes partnersLabelReveal {
@@ -78,60 +75,40 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Belt — THIS is where overflow:hidden lives ──────────── */
-/*    The track can scroll freely; the belt clips it.        */
-.partners-belt {
-  overflow: hidden;                  /* ← key fix: clips the scrolling track */
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
-  padding: 8px 0 16px;
-}
-
-/* ── Scrolling Track ─────────────────────────────────────── */
-/*    width:max-content + flex lets the duplicate set sit    */
-/*    right beside Set 1. translateX(-50%) scrolls exactly   */
-/*    one full set-width, then loops seamlessly.             */
-.partners-track {
+/* ── Static Logo Grid ─────────────────────────────────────── */
+.partners-grid {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  width: max-content;                /* Stretches to fit both sets */
-  animation: partnersScroll 30s linear infinite;
-  will-change: transform;
-}
-
-.partners-track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes partnersScroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); } /* -50% = exactly one set-width */
+  justify-content: center;
+  gap: 0;
+  padding: 0 48px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 /* ── Individual Logo Item ─────────────────────────────────── */
 .partner-item {
-  flex-shrink: 0;
-  padding: 0 60px;
+  flex: 0 0 auto;
+  padding: 24px 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-right: 1px solid rgba(148,0,211,0.15);
+  border-right: 1px solid rgba(148, 0, 211, 0.15);
+  opacity: 0;
+  animation: partnerFadeIn 0.5s ease forwards;
 }
 
-.partner-item:last-child {
-  border-right: none;
+/* Stagger each logo in */
+.partner-item:nth-child(1) { animation-delay: 0.1s; }
+.partner-item:nth-child(2) { animation-delay: 0.2s; }
+.partner-item:nth-child(3) { animation-delay: 0.3s; }
+.partner-item:nth-child(4) { animation-delay: 0.4s; }
+.partner-item:nth-child(5) { animation-delay: 0.5s; border-right: none; }
+
+@keyframes partnerFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .partner-item a {
@@ -142,7 +119,7 @@
 
 /* ── Logo Image ───────────────────────────────────────────── */
 .partner-item img {
-  height: 52px;
+  height: 56px;
   width: auto;
   max-width: 180px;
   object-fit: contain;
@@ -158,33 +135,35 @@
 }
 
 /* ── Responsive ───────────────────────────────────────────── */
-@media (max-width: 600px) {
+@media (max-width: 900px) {
+  .partners-grid {
+    gap: 0;
+    padding: 0 24px;
+  }
+
   .partner-item {
-    padding: 0 36px;
-  }
-
-  .partner-item img {
-    height: 36px;
-    max-width: 120px;
-  }
-
-  .partners-track {
-    animation-duration: 22s;
+    padding: 20px 32px;
   }
 }
 
-/* ── Reduced Motion ───────────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  .partners-track {
-    animation: none;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    padding: 16px 24px;
-    gap: 48px;
+@media (max-width: 600px) {
+  .partners-grid {
+    gap: 0;
   }
 
   .partner-item {
+    flex: 0 0 50%;
     border-right: none;
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(148, 0, 211, 0.12);
+  }
+
+  .partner-item:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+
+  .partner-item img {
+    height: 40px;
+    max-width: 130px;
   }
 }
