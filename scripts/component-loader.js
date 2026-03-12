@@ -73,15 +73,18 @@ async function initGlobalScripts() {
     { initNavScroll },
     { initScrollReveal },
     { initGlobe },
+    { initHyperText },
   ] = await Promise.all([
     import('/scripts/nav-scroll.js'),
     import('/scripts/scroll-reveal.js'),
     import('/scripts/globe.js'),
+    import('/scripts/hyper-text.js'),
   ]);
 
   initNavScroll();
   initScrollReveal();
   initGlobe();
+  initHyperText();
 }
 
 /**
