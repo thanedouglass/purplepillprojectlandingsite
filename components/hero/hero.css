@@ -26,8 +26,8 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(88,0,155,0.25) 0%, transparent 70%),
-    linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(88, 0, 155, 0.25) 0%, transparent 70%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.7) 100%);
   z-index: 1;
 }
 
@@ -72,8 +72,8 @@
 
   /* Subtle glow */
   text-shadow:
-    0 0 60px rgba(148,0,211,0.5),
-    0 0 120px rgba(148,0,211,0.2);
+    0 0 60px rgba(148, 0, 211, 0.5),
+    0 0 120px rgba(148, 0, 211, 0.2);
 
   opacity: 0;
   animation: heroFadeUp 0.8s ease forwards 0.25s;
@@ -86,11 +86,13 @@
 }
 
 .hero-title span:not(.resolved) {
-  color: rgba(148, 0, 211, 0.85);   /* Purple while scrambling */
+  color: rgba(148, 0, 211, 0.85);
+  /* Purple while scrambling */
 }
 
 .hero-title span.resolved {
-  color: #ffffff;                    /* White once resolved */
+  color: #ffffff;
+  /* White once resolved */
 }
 
 .hero-title .hyper-space {
@@ -103,7 +105,7 @@
   font-family: 'Poppins', sans-serif;
   font-size: clamp(0.95rem, 1.6vw, 1.2rem);
   font-weight: 300;
-  color: rgba(255,255,255,0.72);
+  color: rgba(255, 255, 255, 0.72);
   max-width: 580px;
   margin: 0 auto 40px;
   line-height: 1.65;
@@ -140,7 +142,7 @@
   display: block;
   width: 1px;
   height: 48px;
-  background: linear-gradient(to bottom, rgba(0,206,209,0.8), transparent);
+  background: linear-gradient(to bottom, rgba(0, 206, 209, 0.8), transparent);
   animation: scrollLinePulse 2s ease-in-out infinite;
 }
 
@@ -149,18 +151,34 @@
   font-size: 0.65rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: rgba(0,206,209,0.6);
+  color: rgba(0, 206, 209, 0.6);
 }
 
 /* ── Keyframes ─────────────────────────────────────────────── */
 @keyframes heroFadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes scrollLinePulse {
-  0%, 100% { transform: scaleY(1); opacity: 0.8; }
-  50%       { transform: scaleY(0.6); opacity: 0.3; }
+
+  0%,
+  100% {
+    transform: scaleY(1);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scaleY(0.6);
+    opacity: 0.3;
+  }
 }
 
 /* ── Responsive ─────────────────────────────────────────────── */
