@@ -76,7 +76,7 @@ export const galleryItems = [
     category: 'event',
     title: 'SXSW 2025 — Red Ruby Den Stage',
     episode: null,
-    thumbnail: '/assets/images/sxsw-thumb.jpg',
+    thumbnail: '/assets/images/sxsw-thumb.png',
     embedUrl: 'https://www.youtube.com/embed/REPLACE_ME',
     tags: ['SXSW', 'Live', 'Austin'],
     date: '2025-03-10',
