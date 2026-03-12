@@ -69,8 +69,9 @@ export function initMatrixText() {
     // Run on load
     runMatrixAnimation(el, text, initialDelay, letterDuration, letterInterval);
 
-    // Re-run on hover
-    el.closest('section, .partners-header, p')?.addEventListener('mouseenter', () => {
+    // Re-run on hover — attach to the element itself
+    el.style.cursor = 'default';
+    el.addEventListener('mouseenter', () => {
       runMatrixAnimation(el, text, 0, letterDuration, letterInterval);
     });
   });
