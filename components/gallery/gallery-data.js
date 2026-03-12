@@ -47,6 +47,18 @@ export const galleryItems = [
     live: true,
   },
   {
+    id: 'ep-03',
+    type: 'video',
+    category: 'episode',
+    title: 'Critical Thinking',
+    episode: 'S01 · EP 03',
+    thumbnail: '/assets/images/ep03-thumb.jpg',
+    embedUrl: 'https://www.youtube.com/embed/REPLACE_ME',
+    tags: ['Parasocial', 'AI', 'Teen Mental Health'],
+    date: '2025-04-01',
+    live: true,
+  },
+  {
     id: 'ethdenvr-2025',
     type: 'video',
     category: 'event',
