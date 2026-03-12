@@ -1,16 +1,22 @@
 <!-- ── PARTNERS ───────────────────────────────────────────────────────────── -->
 <section id="partners" aria-label="Our Partners">
 
-  <div class="partners-track-wrapper">
-    <!-- Label sits right above the scrolling belt -->
-    <div class="partners-header">
-      <p class="section-tag partners-label">
-        <span class="partners-label-slash">//</span>
-        <span class="partners-label-text">Learn About Our Partners</span>
-      </p>
-    </div>
+  <!-- Label sits directly above the belt — outside the overflow:hidden wrapper -->
+  <div class="partners-header">
+    <p class="partners-label">
+      <span
+        class="partners-label-text"
+        data-matrix-text="LEARN ABOUT OUR PARTNERS"
+        data-initial-delay="300"
+        data-letter-duration="450"
+        data-letter-interval="60"
+      >LEARN ABOUT OUR PARTNERS</span>
+    </p>
+  </div>
 
-    <!-- Belt — scrolls left, duplicated for seamless infinite loop -->
+  <!-- Belt wrapper — overflow:hidden + edge-fade mask lives HERE -->
+  <div class="partners-belt">
+    <!-- Track — just flex + animation, no overflow clipping itself -->
     <div class="partners-track" id="partners-track" aria-hidden="true">
 
       <!-- ── Set 1 ──────────────────────────────────────────────────────── -->
@@ -44,7 +50,7 @@
         </a>
       </div>
 
-      <!-- ── Set 2 (duplicate for seamless loop) ──────────────────────── -->
+      <!-- ── Set 2 — identical copy for seamless infinite loop ────────── -->
       <div class="partner-item">
         <a href="https://www.global-changemakers.net" target="_blank" rel="noopener" aria-label="Global Changemakers">
           <img src="/assets/images/partners/global-changemakers.png" alt="Global Changemakers" />
@@ -75,6 +81,7 @@
         </a>
       </div>
 
-    </div>
-  </div>
+    </div><!-- /partners-track -->
+  </div><!-- /partners-belt -->
+
 </section>
