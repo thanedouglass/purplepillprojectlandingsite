@@ -107,7 +107,19 @@ document.querySelectorAll('.gallery-filter').forEach(btn => {
 // ── Lightbox ─────────────────────────────────────────────────────────────────
 
 function openLightbox(embedUrl, title) {
-  iframe.src = embedUrl + '?autoplay=1';
+  let finalUrl = embedUrl;
+
+  // Instagram blocks normal URLs in iframes. Convert to the /embed format.
+  if (embedUrl.includes('instagram.com')) {
+    const baseUrl = embedUrl.split('?')[0].replace(/\/+$/, ""); // Strip queries and trailing slashes
+    finalUrl = baseUrl + '/embed';
+  } 
+  // Append autoplay safely for standard video players
+  else if (embedUrl.includes('youtube.com') || embedUrl.includes('vimeo.com')) {
+    finalUrl += (embedUrl.includes('?') ? '&' : '?') + 'autoplay=1';
+  }
+
+  iframe.src = finalUrl;
   iframe.title = title;
   lightbox.classList.add('active');
   document.body.style.overflow = 'hidden';
