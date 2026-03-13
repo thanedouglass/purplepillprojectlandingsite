@@ -1,0 +1,323 @@
+/* ============================================================
+   DEN.CSS — Breath Weaver standalone page
+   Matches Purple Pill tokens.css variable conventions.
+   Falls back gracefully if tokens.css vars are absent.
+   ============================================================ */
+
+/* ── Reset / shell ─────────────────────────────────────────── */
+*,
+*::before,
+*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.den-page {
+  background: #04000a;
+  color: #ffd600;
+  font-family: 'Courier New', Courier, monospace;
+  min-height: 100dvh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Back link ─────────────────────────────────────────────── */
+.den-back {
+  position: fixed;
+  top: 22px;
+  left: 22px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 214, 0, 0.45);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-decoration: none;
+  transition: color 0.25s ease, opacity 0.25s ease;
+}
+
+.den-back:hover {
+  color: #ffd600;
+}
+
+.den-back svg {
+  flex-shrink: 0;
+}
+
+/* ── Main canvas container ─────────────────────────────────── */
+.den-main {
+  position: relative;
+  width: 100vw;
+  height: 100dvh;
+}
+
+#bw-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Hidden video — MediaPipe reads frames from this */
+#bw-video {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+}
+
+/* ── Overlays ──────────────────────────────────────────────── */
+.bw-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #04000a;
+  z-index: 10;
+  gap: 18px;
+}
+
+.bw-overlay[hidden] { display: none; }
+
+/* Loading */
+.bw-spinner {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #ff1744;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: bw-spin 0.85s linear infinite;
+}
+
+.bw-label {
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  color: rgba(255, 214, 0, 0.6);
+}
+
+/* Gate */
+.bw-gate {
+  background: #04000a;
+}
+
+.bw-gate-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  max-width: 420px;
+  padding: 0 28px;
+}
+
+.bw-gate-eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.32em;
+  color: #ff1744;
+  text-shadow: 0 0 12px rgba(255, 23, 68, 0.5);
+}
+
+.bw-gate-title {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(36px, 7vw, 64px);
+  font-weight: 700;
+  line-height: 1.05;
+  color: #ffd600;
+  text-shadow: 0 0 40px rgba(255, 214, 0, 0.2);
+  letter-spacing: -0.01em;
+}
+
+.bw-gate-body {
+  font-size: 13px;
+  line-height: 1.9;
+  color: rgba(255, 214, 0, 0.55);
+  letter-spacing: 0.05em;
+}
+
+.bw-gate-pattern {
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  color: rgba(255, 23, 68, 0.7);
+  border: 1px solid rgba(255, 23, 68, 0.25);
+  padding: 7px 18px;
+}
+
+.bw-gate-note {
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  color: rgba(255, 214, 0, 0.2);
+}
+
+/* Error */
+.bw-error {
+  gap: 14px;
+}
+
+.bw-error-title {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  color: #ff1744;
+}
+
+.bw-error-msg {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: rgba(255, 23, 68, 0.4);
+  max-width: 320px;
+  text-align: center;
+  line-height: 1.7;
+}
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.bw-btn {
+  display: inline-block;
+  padding: 13px 32px;
+  border: 1px solid #ff1744;
+  background: transparent;
+  color: #ff1744;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.bw-btn:hover {
+  box-shadow: 0 0 22px rgba(255, 23, 68, 0.4);
+  background: rgba(255, 23, 68, 0.06);
+}
+
+.bw-btn--outline {
+  border-color: rgba(255, 214, 0, 0.3);
+  color: rgba(255, 214, 0, 0.5);
+}
+
+.bw-btn--outline:hover {
+  box-shadow: 0 0 16px rgba(255, 214, 0, 0.15);
+  background: rgba(255, 214, 0, 0.03);
+}
+
+/* ── HUD elements ──────────────────────────────────────────── */
+
+/* Phase pill — top right */
+.bw-phase-pill {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 50;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  padding: 5px 13px;
+  border: 1px solid currentColor;
+  transition: color 0.38s ease, border-color 0.38s ease, text-shadow 0.38s ease;
+}
+
+.bw-phase-pill[hidden] { display: none; }
+
+.bw-phase-pill[data-phase="idle"]   { color: rgba(255, 214, 0, 0.45); }
+.bw-phase-pill[data-phase="inhale"] { color: #00e5ff; text-shadow: 0 0 10px rgba(0,229,255,0.5); }
+.bw-phase-pill[data-phase="hold"]   { color: #ff6d00; text-shadow: 0 0 10px rgba(255,109,0,0.5); }
+.bw-phase-pill[data-phase="exhale"] { color: #ff1744; text-shadow: 0 0 10px rgba(255,23,68,0.5); }
+
+/* Cycles counter — top left, below back link */
+.bw-cycles {
+  position: fixed;
+  top: 56px;
+  left: 22px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.bw-cycles[hidden] { display: none; }
+
+.bw-cycles-label {
+  font-size: 7px;
+  letter-spacing: 0.3em;
+  color: rgba(255, 214, 0, 0.28);
+}
+
+.bw-cycles-count {
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(255, 214, 0, 0.55);
+  line-height: 1;
+}
+
+/* Hands indicator dot — bottom right */
+.bw-hands-dot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 50;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bw-hands-dot[hidden]    { display: none; }
+.bw-hands-dot.hands-on   {
+  background: #00e676;
+  box-shadow: 0 0 10px rgba(0, 230, 118, 0.7);
+}
+
+/* Hands prompt — bottom center */
+.bw-hands-prompt {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: rgba(255, 214, 0, 0.45);
+  white-space: nowrap;
+  animation: bw-pulse 2.2s ease-in-out infinite;
+}
+
+.bw-hands-prompt[hidden] { display: none; }
+
+/* Cycle complete flash — center top */
+.bw-flash {
+  position: fixed;
+  top: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: #00e676;
+  text-shadow: 0 0 18px rgba(0, 230, 118, 0.8);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.bw-flash.visible {
+  opacity: 1;
+}
+
+/* ── Keyframes ─────────────────────────────────────────────── */
+@keyframes bw-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bw-pulse {
+  0%, 100% { opacity: 0.45; }
+  50%       { opacity: 0.9; }
+}
+
+/* ── Responsive — small screens ────────────────────────────── */
+@media (max-width: 480px) {
+  .bw-gate-title   { font-size: 40px; }
+  .bw-gate-body    { font-size: 12px; }
+  .den-back        { font-size: 8px; }
+}

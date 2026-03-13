@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Den — Purple Pill</title>
+  <meta name="description" content="Enter The Den. A hand-tracking nervous system regulation experience." />
+  <link rel="icon" href="/assets/images/favicon.png" />
+  <link rel="stylesheet" href="/styles/tokens.css" />
+  <link rel="stylesheet" href="/styles/globals.css" />
+  <link rel="stylesheet" href="den.css" />
+</head>
+<body class="den-page">
+
+  <!-- ── Back nav ─────────────────────────────────────────────────────── -->
+  <a href="/" class="den-back" aria-label="Back to Purple Pill">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    PURPLE PILL
+  </a>
+
+  <!-- ── Main experience ───────────────────────────────────────────────── -->
+  <main class="den-main">
+
+    <!-- Canvas renders the full visual -->
+    <canvas id="bw-canvas" aria-label="Breath Weaver — hand tracking visualization"></canvas>
+
+    <!-- Hidden video feed that MediaPipe reads from -->
+    <video id="bw-video" playsinline muted aria-hidden="true"></video>
+
+    <!-- ── Overlay: loading ─────────────────────────────────────────── -->
+    <div id="bw-loading" class="bw-overlay" role="status" aria-live="polite">
+      <div class="bw-spinner"></div>
+      <span class="bw-label">INITIALIZING BREATH WEAVER</span>
+    </div>
+
+    <!-- ── Overlay: permission gate ────────────────────────────────── -->
+    <div id="bw-gate" class="bw-overlay bw-gate" hidden>
+      <div class="bw-gate-inner">
+        <p class="bw-gate-eyebrow">RED RUBY DEN</p>
+        <h1 class="bw-gate-title">The Breath<br>Weaver</h1>
+        <p class="bw-gate-body">
+          Spread your hands apart to inhale.<br>
+          Pull them together to exhale.<br>
+          Your nervous system does the rest.
+        </p>
+        <p class="bw-gate-pattern">4 · 7 · 8 &nbsp;PATTERN</p>
+        <button id="bw-start-btn" class="bw-btn">
+          ALLOW CAMERA &amp; BEGIN
+        </button>
+        <p class="bw-gate-note">Camera feed never leaves your device.</p>
+      </div>
+    </div>
+
+    <!-- ── Overlay: error ──────────────────────────────────────────── -->
+    <div id="bw-error" class="bw-overlay bw-error" hidden role="alert">
+      <p class="bw-error-title">CAMERA ACCESS REQUIRED</p>
+      <p id="bw-error-msg" class="bw-error-msg"></p>
+      <a href="/" class="bw-btn bw-btn--outline">RETURN HOME</a>
+    </div>
+
+    <!-- ── HUD: phase pill ─────────────────────────────────────────── -->
+    <div id="bw-phase-pill" class="bw-phase-pill" aria-live="polite" hidden>IDLE</div>
+
+    <!-- ── HUD: cycle counter ──────────────────────────────────────── -->
+    <div id="bw-cycles" class="bw-cycles" hidden>
+      <span class="bw-cycles-label">CYCLES</span>
+      <span id="bw-cycles-count" class="bw-cycles-count">0</span>
+    </div>
+
+    <!-- ── HUD: hands indicator ────────────────────────────────────── -->
+    <div id="bw-hands-dot" class="bw-hands-dot" hidden aria-hidden="true"></div>
+
+    <!-- ── HUD: hands prompt ───────────────────────────────────────── -->
+    <p id="bw-hands-prompt" class="bw-hands-prompt" hidden>
+      RAISE BOTH HANDS INTO FRAME
+    </p>
+
+    <!-- ── HUD: cycle flash ────────────────────────────────────────── -->
+    <p id="bw-flash" class="bw-flash" aria-live="assertive">✦ CYCLE COMPLETE ✦</p>
+
+  </main>
+
+  <script type="module" src="den.js"></script>
+</body>
+</html>
