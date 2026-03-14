@@ -13,7 +13,7 @@
  *   title       — display title
  *   episode     — episode label e.g. 'S01E01' (optional)
  *   thumbnail   — path to thumbnail image (fallback if no thumb: gradient)
- *   embedUrl    — YouTube/Vimeo embed URL (for type: 'video')
+ *   embedUrl    — YouTube/Vimeo/Instagram embed URL or local .mp4 path (for type: 'video')
  *   srcUrl      — direct image URL (for type: 'image')
  *   tags        — array of strings for metadata display
  *   date        — ISO date string 'YYYY-MM-DD'
@@ -29,8 +29,8 @@ export const galleryItems = [
     title: 'The Yes-Man Protocol',
     episode: 'S01 · EP 01',
     thumbnail: '/assets/images/ep01-thumb.png',
-    embedUrl: 'https://www.youtube.com/embed/REPLACE_ME',
-    tags: ['AI', 'Sycophancy', 'Mental Health'],
+    embedUrl: '/assets/video/refresher_V1.mp4',
+    tags: ['AI', 'Sycophancy', 'Echo Chamber', 'Spanish'],
     date: '2025-12-25',
     live: true,
   },
@@ -41,8 +41,8 @@ export const galleryItems = [
     title: 'The Digital Ghost',
     episode: 'S01 · EP 02',
     thumbnail: '/assets/images/ep02-thumb.png',
-    embedUrl: 'https://www.youtube.com/embed/REPLACE_ME',
-    tags: ['Parasocial', 'AI', 'Teen Mental Health'],
+    embedUrl: '/assets/video/TheBond.mp4',
+    tags: ['AI', 'Sycophancy', 'Youth Mental Health'],
     date: '2026-01-15',
     live: true,
   },
@@ -53,9 +53,21 @@ export const galleryItems = [
     title: 'Critical Thinking',
     episode: 'S01 · EP 03',
     thumbnail: '/assets/images/ep03-thumb.png',
-    embedUrl: 'https://www.youtube.com/embed/REPLACE_ME',
-    tags: ['Parasocial', 'AI', 'Teen Mental Health'],
+    embedUrl: '/assets/video/Critical_Think.mp4',
+    tags: ['Safety', 'Prompting', 'AI'],
     date: '2026-01-31',
+    live: true,
+  },
+  {
+    id: 'ep-04',
+    type: 'video',
+    category: 'episode',
+    title: 'Safe Prompting',
+    episode: 'S01 · EP 04',
+    thumbnail: '/assets/images/ep03-thumb.png',
+    embedUrl: '/assets/video/Safe_Prompt.mp4',
+    tags: ['Safety', 'Prompting', 'AI'],
+    date: '2026-02-14',
     live: true,
   },
   {

@@ -8,7 +8,7 @@ import { galleryItems } from './gallery-data.js';
 const grid      = document.getElementById('gallery-grid');
 const emptyEl   = document.getElementById('gallery-empty');
 const lightbox  = document.getElementById('gallery-lightbox');
-const iframe    = document.getElementById('lightbox-iframe');
+const lightboxInner = document.getElementById('lightbox-inner-container');
 const closeBtn  = document.getElementById('lightbox-close');
 
 let currentFilter = 'all';
@@ -64,12 +64,12 @@ function buildCard(item, index) {
   `;
 
   if (item.type === 'video' && item.embedUrl) {
-    card.addEventListener('click', () => openLightbox(item.embedUrl, item.title));
+    card.addEventListener('click', () => openLightbox(item.embedUrl, item.title, item.category));
     card.style.cursor = 'pointer';
     card.setAttribute('tabindex', '0');
     card.setAttribute('aria-label', `Play: ${item.title}`);
     card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') openLightbox(item.embedUrl, item.title);
+      if (e.key === 'Enter' || e.key === ' ') openLightbox(item.embedUrl, item.title, item.category);
     });
   }
 
@@ -106,21 +106,43 @@ document.querySelectorAll('.gallery-filter').forEach(btn => {
 
 // ── Lightbox ─────────────────────────────────────────────────────────────────
 
-function openLightbox(embedUrl, title) {
+function openLightbox(embedUrl, title, category) {
   let finalUrl = embedUrl;
+  
+  // Clear out previous content
+  lightboxInner.innerHTML = '';
+  
+  // Reset inline styling that might have been added by specific media formats
+  lightboxInner.style.cssText = '';
 
-  // Instagram blocks normal URLs in iframes. Convert to the /embed format.
-  if (embedUrl.includes('instagram.com')) {
-    const baseUrl = embedUrl.split('?')[0].replace(/\/+$/, ""); // Strip queries and trailing slashes
-    finalUrl = baseUrl + '/embed';
-  } 
-  // Append autoplay safely for standard video players
-  else if (embedUrl.includes('youtube.com') || embedUrl.includes('vimeo.com')) {
-    finalUrl += (embedUrl.includes('?') ? '&' : '?') + 'autoplay=1';
+  if (embedUrl.endsWith('.mp4')) {
+    // Treat as local video with 9:16 mobile aspect ratio style (like Red Ruby Den)
+    lightboxInner.style.cssText = 'position: relative; width: 100%; max-width: 512px; aspect-ratio: 9/16; margin: 0 auto; border-radius: 32px; box-shadow: 0 0 50px rgba(139,0,20,0.5); overflow: hidden;';
+    
+    lightboxInner.innerHTML = `
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+        <video autoplay controls playsinline aria-hidden="true" style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 1;">
+          <source src="${finalUrl}" type="video/mp4" />
+        </video>
+        <div class="den-noise" aria-hidden="true" style="position: absolute; inset: 0; background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E&quot;); background-size: 200px 200px; opacity: 0.4; pointer-events: none;"></div>
+        <div class="den-curtain-left" aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 22%; height: 100%; background: linear-gradient(to right, rgba(139,0,20,0.55) 0%, transparent 100%); pointer-events: none;"></div>
+        <div class="den-curtain-right" aria-hidden="true" style="position: absolute; top: 0; right: 0; width: 22%; height: 100%; background: linear-gradient(to left, rgba(139,0,20,0.55) 0%, transparent 100%); pointer-events: none;"></div>
+      </div>
+    `;
+  } else {
+    // Standard embed handling (YouTube, Instagram)
+    if (embedUrl.includes('instagram.com')) {
+      const baseUrl = embedUrl.split('?')[0].replace(/\/+$/, "");
+      finalUrl = baseUrl + '/embed';
+    } else if (embedUrl.includes('youtube.com') || embedUrl.includes('vimeo.com')) {
+      finalUrl += (embedUrl.includes('?') ? '&' : '?') + 'autoplay=1';
+    }
+
+    lightboxInner.innerHTML = `
+      <iframe src="${finalUrl}" title="${title}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen loading="lazy" style="width: 100%; height: 100%; border: 1px solid rgba(148,0,211,0.3); border-radius: var(--radius-md);"></iframe>
+    `;
   }
 
-  iframe.src = finalUrl;
-  iframe.title = title;
   lightbox.classList.add('active');
   document.body.style.overflow = 'hidden';
   closeBtn.focus();
@@ -128,14 +150,14 @@ function openLightbox(embedUrl, title) {
 
 function closeLightbox() {
   lightbox.classList.remove('active');
-  iframe.src = '';
+  lightboxInner.innerHTML = ''; // Stop video playback
   document.body.style.overflow = '';
 }
 
 closeBtn.addEventListener('click', closeLightbox);
 
 lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox) closeLightbox();
+  if (e.target === lightbox || e.target.classList.contains('gallery-lightbox')) closeLightbox();
 });
 
 document.addEventListener('keydown', (e) => {
