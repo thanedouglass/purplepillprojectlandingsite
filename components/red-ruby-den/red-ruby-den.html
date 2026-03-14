@@ -1,17 +1,21 @@
 <!-- ── RED RUBY DEN ──────────────────────────────────────────────────────── -->
-<section id="red-ruby-den">
-  <div class="container">
+<section id="red-ruby-den" style="position: relative; overflow: hidden; background-color: var(--background, #050505);">
+  <!-- Falling Pattern UI Background -->
+  <div id="red-ruby-falling-pattern"
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0; transition: opacity 0.5s;">
+  </div>
+  <div id="red-ruby-falling-overlay"
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; backdrop-filter: blur(1em); background-image: radial-gradient(circle at 50% 50%, transparent 0, transparent 2px, var(--background, #050505) 2px); background-size: 8px 8px;">
+  </div>
+
+  <div class="container" style="position: relative; z-index: 2;">
 
     <div class="den-inner reveal">
-      <p class="section-tag">// 005 — The Den</p>
+      <p class="section-tag">// 002 — The Den</p>
       <h2 class="den-headline">
         <span class="den-hl-bone">FEEL BEYOND</span><br>
-        <span class="den-hl-crimson"
-              data-matrix-text="THE VEIL."
-              data-initial-delay="600"
-              data-letter-duration="480"
-              data-letter-interval="70"
-        >THE VEIL.</span>
+        <span class="den-hl-crimson" data-matrix-text="THE VEIL." data-initial-delay="600" data-letter-duration="480"
+          data-letter-interval="70">THE VEIL.</span>
       </h2>
       <p class="den-subheading">
         The Red Ruby Den is a digital metaverse stage — a fully interactive room
@@ -27,8 +31,9 @@
       <!-- Preview Panel -->
       <div class="den-preview reveal" aria-label="Red Ruby Den preview">
         <div class="den-preview-inner">
-          <video class="den-video" autoplay muted loop playsinline aria-hidden="true" style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.6;">
-            <source src="/assets/video/den-season1-trailer.mp4" type="video/mp4" />
+          <video class="den-video" autoplay muted loop playsinline aria-hidden="true"
+            style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.6;">
+            <source src="/assets/video/purple_pill_bg_loop.mp4" type="video/mp4" />
           </video>
           <div class="den-noise" aria-hidden="true"></div>
           <div class="den-curtain-left" aria-hidden="true"></div>

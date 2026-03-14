@@ -31,7 +31,7 @@ export const galleryItems = [
     thumbnail: '/assets/images/ep01-thumb.png',
     embedUrl: 'https://www.youtube.com/embed/REPLACE_ME',
     tags: ['AI', 'Sycophancy', 'Mental Health'],
-    date: '2025-03-01',
+    date: '2025-12-25',
     live: true,
   },
   {
@@ -43,7 +43,7 @@ export const galleryItems = [
     thumbnail: '/assets/images/ep02-thumb.png',
     embedUrl: 'https://www.youtube.com/embed/REPLACE_ME',
     tags: ['Parasocial', 'AI', 'Teen Mental Health'],
-    date: '2025-04-01',
+    date: '2026-01-15',
     live: true,
   },
   {
@@ -55,7 +55,7 @@ export const galleryItems = [
     thumbnail: '/assets/images/ep03-thumb.png',
     embedUrl: 'https://www.youtube.com/embed/REPLACE_ME',
     tags: ['Parasocial', 'AI', 'Teen Mental Health'],
-    date: '2025-04-01',
+    date: '2026-01-31',
     live: true,
   },
   {
@@ -67,7 +67,7 @@ export const galleryItems = [
     thumbnail: '/assets/images/ethdenver-thumb.png',
     embedUrl: 'https://www.instagram.com/reel/DVcDCAUAYKW/?igsh=MTE3MjNrbXZwM3QwZA==',
     tags: ['EthDenver', 'Live', 'Web3'],
-    date: '2025-02-27',
+    date: '2026-02-18',
     live: false,
   },
   {
@@ -79,7 +79,7 @@ export const galleryItems = [
     thumbnail: '/assets/images/sxsw-thumb.png',
     embedUrl: 'https://www.youtube.com/embed/REPLACE_ME',
     tags: ['SXSW', 'Live', 'Austin'],
-    date: '2025-03-10',
+    date: '2026-03-14',
     live: false,
   },
   // ── Add new items below this line ──────────────────────
