@@ -42,39 +42,145 @@
         </div>
       </div>
 
-      <!-- Waitlist Form -->
-      <div class="den-form-block reveal">
-        <p class="den-form-label">// Request Early Access</p>
+      <!-- Waitlist Form Area -->
+      <div class="den-form-block reveal" style="position: relative; min-height: 400px;">
+        
+        <!-- View 1: Entry Cards -->
+        <div id="view-cards" style="transition: opacity 0.4s ease, transform 0.4s ease; opacity: 1; transform: translateY(0);">
+          <p class="den-form-label">// STAY IN THE LOOP</p>
+          <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+            
+            <button type="button" id="card-beta" style="flex: 1; min-width: 200px; padding: 32px 24px; background: rgba(139,0,20,0.05); border: 1px solid rgba(139,0,20,0.3); border-radius: var(--radius-md); text-align: left; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; gap: 12px; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);">
+              <span style="font-size: 24px; color: var(--crimson); text-shadow: 0 0 10px rgba(139,0,20,0.8);">◈</span>
+              <div>
+                <h3 style="font-family: var(--font-display); font-size: 24px; color: var(--bone); letter-spacing: 0.05em; margin: 0 0 4px;">JOIN THE BETA</h3>
+                <p style="font-family: var(--font-mono); font-size: 11px; color: rgba(245,240,220,0.6); letter-spacing: 0.1em; margin: 0; text-transform: uppercase;">Test the Den before it opens</p>
+              </div>
+            </button>
 
-        <form id="den-waitlist-form" novalidate>
-          <div class="den-input-group">
-            <input type="text" id="den-name" name="name" placeholder="YOUR NAME" autocomplete="name" required />
-          </div>
-          <div class="den-input-group">
-            <input type="email" id="den-email" name="email" placeholder="YOUR EMAIL" autocomplete="email" required />
-          </div>
-          <div class="den-input-group">
-            <select id="den-role" name="role">
-              <option value="" disabled selected>YOUR ROLE</option>
-              <option value="student">Student</option>
-              <option value="educator">Educator / Counselor</option>
-              <option value="creator">Creator / Collaborator</option>
-              <option value="press">Press / Media</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-crimson den-submit" id="den-submit-btn">
-            Request Access
-          </button>
-        </form>
+            <button type="button" id="card-partner" style="flex: 1; min-width: 200px; padding: 32px 24px; background: rgba(139,0,20,0.05); border: 1px solid rgba(139,0,20,0.3); border-radius: var(--radius-md); text-align: left; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; gap: 12px; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);">
+              <span style="font-size: 24px; color: var(--purple); text-shadow: 0 0 10px rgba(148,0,211,0.8);">⬡</span>
+              <div>
+                <h3 style="font-family: var(--font-display); font-size: 24px; color: var(--bone); letter-spacing: 0.05em; margin: 0 0 4px;">PARTNER WITH US</h3>
+                <p style="font-family: var(--font-mono); font-size: 11px; color: rgba(245,240,220,0.6); letter-spacing: 0.1em; margin: 0; text-transform: uppercase;">Build the world with us</p>
+              </div>
+            </button>
 
-        <!-- Success State (hidden by default) -->
-        <div class="den-success" id="den-success" aria-live="polite">
-          <p class="den-success-title">ACCESS PENDING.</p>
-          <p class="den-success-body">You're on the list. We'll reach you before the doors open.</p>
+          </div>
         </div>
 
-        <p class="den-counter" id="den-counter">
+        <style>
+          #card-beta:hover { border-color: var(--crimson); background: rgba(139,0,20,0.15); box-shadow: 0 0 30px rgba(139,0,20,0.2), inset 0 0 20px rgba(0,0,0,0.5); transform: translateY(-4px); }
+          #card-partner:hover { border-color: var(--purple); background: rgba(148,0,211,0.1); box-shadow: 0 0 30px rgba(148,0,211,0.2), inset 0 0 20px rgba(0,0,0,0.5); transform: translateY(-4px); }
+          .den-view-hidden { opacity: 0 !important; pointer-events: none !important; position: absolute !important; top: 0; left: 0; width: 100%; transform: translateY(20px) !important; visibility: hidden; }
+        </style>
+
+        <!-- View 2: Beta Form -->
+        <div id="view-beta" class="den-view-hidden" style="transition: opacity 0.4s ease, transform 0.4s ease; opacity: 1; transform: translateY(0);">
+          <button type="button" class="btn-back" id="back-beta" style="background: none; border: none; color: rgba(245,240,220,0.5); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; cursor: pointer; padding: 0; margin-bottom: 24px; display: flex; align-items: center; gap: 8px; transition: color 0.2s;"><span style="font-size: 16px;">&larr;</span> Back</button>
+          
+          <p class="den-form-label">// Request Beta Access</p>
+          <form id="den-waitlist-form" novalidate>
+            <input type="hidden" name="form_type" value="beta_tester" />
+            <div class="den-input-group">
+              <input type="text" id="beta-name" name="name" placeholder="YOUR NAME" autocomplete="name" required />
+            </div>
+            <div class="den-input-group">
+              <input type="email" id="beta-email" name="email" placeholder="YOUR EMAIL" autocomplete="email" required />
+            </div>
+            <div class="den-input-group">
+              <select id="beta-role" name="role" required>
+                <option value="" disabled selected>YOUR ROLE</option>
+                <option value="student">Student</option>
+                <option value="educator">Educator / Counselor</option>
+                <option value="creator">Creator / Collaborator</option>
+                <option value="press">Press / Media</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="den-input-group">
+              <textarea id="beta-why" name="why_access" placeholder="Why do you want early access to the Den?" rows="3" required style="width: 100%; background: rgba(139,0,20,0.08); border: 1px solid rgba(139,0,20,0.35); color: var(--bone); font-family: var(--font-mono); font-size: 13px; padding: 14px 18px; outline: none; border-radius: var(--radius-sm); resize: vertical;"></textarea>
+            </div>
+            
+            <div class="den-input-group" style="margin-bottom: 20px;">
+              <p style="font-family: var(--font-mono); font-size: 11px; color: var(--bone); margin-bottom: 8px; opacity: 0.8;">Can you commit to 4–6 weeks of structured feedback?</p>
+              <div style="display: flex; gap: 16px;">
+                <label style="font-family: var(--font-mono); font-size: 12px; color: var(--bone); display: flex; align-items: center; gap: 6px;"><input type="radio" name="feedback_commit" value="yes" required> Yes</label>
+                <label style="font-family: var(--font-mono); font-size: 12px; color: var(--bone); display: flex; align-items: center; gap: 6px;"><input type="radio" name="feedback_commit" value="no"> No</label>
+              </div>
+            </div>
+
+            <div class="den-input-group" style="margin-bottom: 20px;">
+              <p style="font-family: var(--font-mono); font-size: 11px; color: var(--bone); margin-bottom: 8px; opacity: 0.8;">Comfortable with experimental immersive digital experiences?</p>
+              <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <label style="font-family: var(--font-mono); font-size: 12px; color: var(--bone); display: flex; align-items: center; gap: 6px;"><input type="radio" name="experimental_comfort" value="yes" required> Yes</label>
+                <label style="font-family: var(--font-mono); font-size: 12px; color: var(--bone); display: flex; align-items: center; gap: 6px;"><input type="radio" name="experimental_comfort" value="no"> No</label>
+                <label style="font-family: var(--font-mono); font-size: 12px; color: var(--bone); display: flex; align-items: center; gap: 6px;"><input type="radio" name="experimental_comfort" value="tell_me_more"> Tell me more</label>
+              </div>
+            </div>
+
+            <div class="den-input-group">
+              <input type="text" id="beta-source" name="source" placeholder="How did you hear about Remi's Den?" required />
+            </div>
+
+            <button type="submit" class="btn btn-crimson den-submit" id="den-submit-btn">
+              REQUEST BETA ACCESS
+            </button>
+          </form>
+          
+          <div class="den-success" id="den-success" aria-live="polite">
+            <p class="den-success-title">SYSTEM UPDATED.</p>
+            <p class="den-success-body">Beta request received. Keep an eye on your comms for activation instructions.</p>
+          </div>
+        </div>
+
+        <!-- View 3: Partner Form -->
+        <div id="view-partner" class="den-view-hidden" style="transition: opacity 0.4s ease, transform 0.4s ease; opacity: 1; transform: translateY(0);">
+          <button type="button" class="btn-back" id="back-partner" style="background: none; border: none; color: rgba(245,240,220,0.5); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; cursor: pointer; padding: 0; margin-bottom: 24px; display: flex; align-items: center; gap: 8px; transition: color 0.2s;"><span style="font-size: 16px;">&larr;</span> Back</button>
+          
+          <p class="den-form-label">// Build the World</p>
+          <form id="den-partner-form" novalidate>
+            <input type="hidden" name="form_type" value="partner" />
+            <div class="den-input-group">
+              <input type="text" id="partner-name" name="name" placeholder="YOUR NAME" autocomplete="name" required />
+            </div>
+            <div class="den-input-group">
+              <input type="email" id="partner-email" name="email" placeholder="YOUR EMAIL" autocomplete="email" required />
+            </div>
+            <div class="den-input-group">
+              <input type="text" id="partner-org" name="organization" placeholder="ORGANIZATION / PROJECT (OPTIONAL)" />
+            </div>
+            <div class="den-input-group">
+              <select id="partner-expertise" name="expertise" required>
+                <option value="" disabled selected>AREA OF EXPERTISE</option>
+                <option value="tech_dev">Tech / Dev</option>
+                <option value="music">Music</option>
+                <option value="performance">Performance</option>
+                <option value="visual_art">Visual Art</option>
+                <option value="media_press">Media / Press</option>
+                <option value="funding_investment">Funding / Investment</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="den-input-group">
+              <textarea id="partner-collab" name="collaboration_vision" placeholder="What does collaboration look like for you?" rows="3" required style="width: 100%; background: rgba(139,0,20,0.08); border: 1px solid rgba(139,0,20,0.35); color: var(--bone); font-family: var(--font-mono); font-size: 13px; padding: 14px 18px; outline: none; border-radius: var(--radius-sm); resize: vertical;"></textarea>
+            </div>
+            <div class="den-input-group">
+              <input type="url" id="partner-url" name="portfolio_url" placeholder="LINK TO YOUR WORK (OPTIONAL)" />
+            </div>
+
+            <button type="submit" class="btn btn-crimson den-submit" id="partner-submit-btn">
+              START THE CONVERSATION
+            </button>
+          </form>
+          
+          <div class="den-success" id="partner-success" aria-live="polite">
+            <p class="den-success-title">CONNECTION ESTABLISHED.</p>
+            <p class="den-success-body">Signal received. Our team will reach out to discuss building the future together.</p>
+          </div>
+        </div>
+
+        <p class="den-counter" id="den-counter" style="position: absolute; bottom: -40px; left: 0; margin-top: 0;">
           <span class="den-counter-num">847</span> agents already on the list.
         </p>
       </div>
