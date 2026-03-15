@@ -11,6 +11,9 @@ const lightbox  = document.getElementById('gallery-lightbox');
 const lightboxInner = document.getElementById('lightbox-inner-container');
 const closeBtn  = document.getElementById('lightbox-close');
 
+// Move lightbox to body to ensure it sits at the top of the DOM stacking order
+document.body.appendChild(lightbox);
+
 let currentFilter = 'all';
 
 // ── Render ──────────────────────────────────────────────────────────────────
@@ -117,11 +120,11 @@ function openLightbox(embedUrl, title, category) {
 
   if (embedUrl.endsWith('.mp4')) {
     // Treat as local video with 9:16 mobile aspect ratio style (like Red Ruby Den)
-    lightboxInner.style.cssText = 'position: relative; width: 100%; max-width: 512px; aspect-ratio: 9/16; margin: 0 auto; border-radius: 32px; box-shadow: 0 0 50px rgba(139,0,20,0.5); overflow: hidden;';
+    lightboxInner.style.cssText = 'position: relative; width: 100%; max-width: 512px; aspect-ratio: 9/16; margin: 0 auto; border-radius: 32px; box-shadow: 0 0 50px rgba(139,0,20,0.5); overflow: hidden; outline: none; user-select: none;';
     
     lightboxInner.innerHTML = `
-      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-        <video autoplay controls playsinline aria-hidden="true" style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 1;">
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; outline: none; user-select: none;">
+        <video autoplay loop playsinline aria-hidden="true" style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 1; outline: none; user-select: none;">
           <source src="${finalUrl}" type="video/mp4" />
         </video>
         <div class="den-noise" aria-hidden="true" style="position: absolute; inset: 0; background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E&quot;); background-size: 200px 200px; opacity: 0.4; pointer-events: none;"></div>

@@ -7,7 +7,7 @@ const words = [
   "lived.",
   "unlearned.",
   "seen from the inside.",
-  "experienced in the Den."
+  "confronted."
 ];
 
 const typeSpeed = 60;
@@ -24,7 +24,7 @@ function initTypewriter() {
 
   function type() {
     const currentWord = words[wordIndex];
-    
+
     if (isDeleting) {
       textElement.textContent = currentWord.substring(0, charIndex - 1);
       charIndex--;
