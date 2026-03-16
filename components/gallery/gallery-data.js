@@ -77,7 +77,7 @@ export const galleryItems = [
     title: 'EthDenver 2026 — Zen Den',
     episode: null,
     thumbnail: '/assets/images/ethdenver-thumb.png',
-    embedUrl: 'https://www.instagram.com/reel/DVcDCAUAYKW/?igsh=MTE3MjNrbXZwM3QwZA==',
+    embedUrl: '/assets/video/Video-912.mp4',
     tags: ['EthDenver', 'Live', 'Web3'],
     date: '2026-02-18',
     live: false,
