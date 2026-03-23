@@ -78,7 +78,7 @@
 /* ── Full-Width Logo Grid ─────────────────────────────────── */
 .partners-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);  /* 5 equal columns, edge to edge */
+  grid-template-columns: repeat(6, 1fr);  /* 6 equal columns, edge to edge */
   width: 100%;
   padding: 0;
   margin: 0;
@@ -100,7 +100,8 @@
 .partner-item:nth-child(2) { animation-delay: 0.2s; }
 .partner-item:nth-child(3) { animation-delay: 0.3s; }
 .partner-item:nth-child(4) { animation-delay: 0.4s; }
-.partner-item:nth-child(5) { animation-delay: 0.5s; border-right: none; }
+.partner-item:nth-child(5) { animation-delay: 0.5s; }
+.partner-item:nth-child(6) { animation-delay: 0.6s; border-right: none; }
 
 @keyframes partnerFadeIn {
   from { opacity: 0; transform: translateY(12px); }
@@ -131,14 +132,26 @@
   transform: scale(1.06);
 }
 
+/* ── No-hover variant (e.g. Another Awesome Day — text legibility) ── */
+.partner-item.no-hover img {
+  filter: grayscale(0%) brightness(1) invert(0) opacity(1);
+  transition: none;
+}
+
+.partner-item.no-hover a:hover img {
+  filter: grayscale(0%) brightness(1) invert(0) opacity(1);
+  transform: none;
+}
+
 /* ── Responsive ───────────────────────────────────────────── */
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .partners-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 
   .partner-item:nth-child(3) { border-right: none; }
   .partner-item:nth-child(4) { border-right: 1px solid rgba(148,0,211,0.18); }
+  .partner-item:nth-child(6) { border-right: none; }
 
   .partner-item img {
     height: 80px;
