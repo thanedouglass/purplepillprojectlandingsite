@@ -55,7 +55,7 @@ async function loadComponent(slot) {
  * Load component-specific JS modules after all HTML is injected
  */
 async function loadComponentScripts() {
-  const jsComponents = ['red-ruby-den', 'gallery', 'manifesto', 'hero'];
+  const jsComponents = ['gallery', 'red-ruby-den'];
   for (const name of jsComponents) {
     try {
       await import(`${COMPONENT_BASE}/${name}/${name}.js`);

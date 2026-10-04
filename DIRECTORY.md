@@ -33,9 +33,8 @@ purple-pill-project/
 │   │   ├── nav.html                    ← Edit nav links here
 │   │   └── nav.css
 │   │
-│   ├── hero/
-│   │   ├── hero.html                   ← Edit hero headline, subtitle, CTAs here
-│   │   └── hero.css
+│   ├── hero/                           [DEPRECATED — removed in favor of Gallery at front]
+│   │   └── README.md
 │   │
 │   ├── stats-bar/
 │   │   ├── stats-bar.html              ← Edit ticker facts here
@@ -98,7 +97,7 @@ purple-pill-project/
 | Add a new episode card | `components/episodes/episodes.html` |
 | Add a new nav link | `components/nav/nav.html` |
 | Update the manifesto quote | `components/manifesto/manifesto.html` |
-| Change the hero headline | `components/hero/hero.html` |
+| Edit archives / shorts headline | `components/gallery/gallery.html` |
 | Add a new animation | `styles/animations.css` |
 | Add a brand-new section | Create `components/new-section/` folder with `.html` + `.css`, add `<div data-component="new-section"></div>` to `index.html` |
 
